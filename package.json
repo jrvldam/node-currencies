@@ -1,0 +1,22 @@
+{
+  "name": "node-coin",
+  "version": "1.0.0",
+  "description": "API Rest? for various crypto-markets",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "debug": "node --inspect server.js",
+    "dev": "nodemon --inspect server.js 3090",
+    "test": "node_modules/.bin/mocha -u exports test/**/*"
+  },
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "mocha": "^4.1.0",
+    "nodemon": "^1.14.10",
+    "supertest": "^3.0.0"
+  }
+}
