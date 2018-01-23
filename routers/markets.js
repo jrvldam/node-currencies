@@ -1,7 +1,7 @@
-const marketsRouter = require('express').Router;
+const marketsRouter = require('express').Router();
 
 const { markets } = require('../controllers');
 
-marketsRouter.get('/', markets);
+marketsRouter.get('/markets', markets);
 
 module.exports = marketsRouter;

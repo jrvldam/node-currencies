@@ -7,8 +7,8 @@ const {
 const app = express();
 
 app
-  .use('/currencies', currenciesRouter)
-  .use('/markets', marketsRouter)
+  .use(currenciesRouter)
+  .use(marketsRouter)
   .use(notFoundCatcher, errorHandler,);
 
 function notFoundCatcher(req, res, next) {
@@ -16,7 +16,6 @@ function notFoundCatcher(req, res, next) {
   error.status = 404;
   next(error);
 }
-
 function errorHandler(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
