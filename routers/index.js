@@ -1,2 +1,6 @@
-exports.currenciesRouter = require('./currencies');
-exports.marketsRouter = require('./markets');
+const mainRouter = require('express').Router();
+
+mainRouter.use('/currencies', require('./currencies'));
+mainRouter.use('/markets', require('./markets'));
+
+module.exports = mainRouter;

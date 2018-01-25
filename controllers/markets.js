@@ -1,8 +1,12 @@
-const currencies = (req, res, next) => {
-  res.json({
-    message: 'hello market!',
-    params: req.params,
-  });
+const marketsList = (req, res, next) => {
+  res.send('markets list');
 };
 
-module.exports = currencies;
+const marketsById = (req, res, next) => {
+  res.send(`market id ${req.params.id}`);
+};
+
+module.exports = {
+  marketsList,
+  marketsById,
+};

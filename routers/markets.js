@@ -1,7 +1,13 @@
 const marketsRouter = require('express').Router();
 
-const { markets } = require('../controllers');
+const {
+  markets: {
+    marketsList,
+    marketsById
+  }
+} = require('../controllers');
 
-marketsRouter.get('/markets', markets);
+marketsRouter.get('/:id', marketsById);
+marketsRouter.get('/', marketsList);
 
 module.exports = marketsRouter;

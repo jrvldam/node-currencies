@@ -1,7 +1,13 @@
 const currenciesRouter = require('express').Router();
 
-const { currencies } = require('../controllers');
+const {
+  currencies: {
+    currenciesList,
+    currenciesById,
+  }
+} = require('../controllers');
 
-currenciesRouter.get('/currencies', currencies);
+currenciesRouter.get('/:id', currenciesById);
+currenciesRouter.get('/', currenciesList);
 
 module.exports = currenciesRouter;

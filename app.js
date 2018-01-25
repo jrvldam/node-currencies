@@ -1,14 +1,11 @@
 const express = require('express');
-const {
-  currenciesRouter,
-  marketsRouter
-} = require('./routers');
+
+const mainRouter = require('./routers');
 
 const app = express();
 
 app
-  .use(currenciesRouter)
-  .use(marketsRouter)
+  .use(mainRouter)
   .use(notFoundCatcher, errorHandler,);
 
 function notFoundCatcher(req, res, next) {

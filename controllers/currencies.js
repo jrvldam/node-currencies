@@ -1,8 +1,11 @@
-const currenciesControlller = (req, res, next) => {
-  res.json({
-    message: 'hello currencies!',
-    params: req.params,
-  });
-};
+const { cryptocompare, binance } = require('../markets');
 
-module.exports = currenciesControlller;
+exports.currenciesList = (req, res, next) => {
+  const list = binance.currenciesList();
+  return res.json(list);
+}
+
+exports.currenciesById = (req, res, next) => {
+  binance.currenciesById(req.params.id)
+    .then(coin => res.json(coin));
+};
