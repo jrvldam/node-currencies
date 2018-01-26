@@ -8,7 +8,8 @@ module.exports = {
     return fetch(`${URL_DOMAIN}/`);
   },
   currenciesById(id) {
-    return fetch(`https://www.cryptocompare.com/api/data/coinsnapshot/?fsym=${id}&tsym=USD`);
+    const DEPRECATED_URL_DOMAIN = 'https://www.cryptocompare.com';
+    return fetch(`${DEPRECATED_URL_DOMAIN}/api/data/coinsnapshot/?fsym=${id}&tsym=USD`);
   },
   currenciesList() {
     return this.getCache();
