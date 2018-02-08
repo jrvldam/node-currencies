@@ -1,6 +1,7 @@
-const fetch = require('../utils/fetch');
+const { fetch } = require('../utils');
 
 const URL_DOMAIN = 'https://min-api.cryptocompare.com';
+const DEPRECATED_URL_DOMAIN = 'https://www.cryptocompare.com';
 
 module.exports = {
   cache: {},
@@ -8,7 +9,6 @@ module.exports = {
     return fetch(`${URL_DOMAIN}/`);
   },
   currenciesById(id) {
-    const DEPRECATED_URL_DOMAIN = 'https://www.cryptocompare.com';
     return fetch(`${DEPRECATED_URL_DOMAIN}/api/data/coinsnapshot/?fsym=${id}&tsym=USD`);
   },
   currenciesList() {
@@ -28,7 +28,9 @@ module.exports = {
           data: mapObjectToCustomArray(result.Data),
           ts: Date.now(),
         };
-      });
+      }
+    )
+    .catch(err => err);
   },
 };
 

@@ -5,8 +5,17 @@ const mainRouter = require('./routers');
 const app = express();
 
 app
+  .use(queryStringsNotAllowed)
   .use(mainRouter)
   .use(notFoundCatcher, errorHandler,);
+
+function queryStringsNotAllowed(req, res, next) {
+  if ( !Object.getOwnPropertyNames(req.query).length ) return next();
+
+  const error = new Error('Bad request. Query strings not allowed.');
+  error.status = 400;
+  next(error);
+}
 
 function notFoundCatcher(req, res, next) {
   const error = new Error('Not Found');

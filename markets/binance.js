@@ -1,4 +1,4 @@
-const fetch = require('../utils/fetch');
+const { fetch } = require('../utils');
 
 const URL_DOMAIN = 'https://api.binance.com';
 
@@ -23,19 +23,27 @@ module.exports = {
     const priceTicker = fetch(`${URL_DOMAIN}/api/v3/ticker/price`);
     const exchangeInfo = fetch(`${URL_DOMAIN}/api/v1/exchangeInfo`);
     Promise.all([exchangeInfo, priceTicker])
-      .then(values => {
-        const data = values[0].symbols;
-        const prices = getPriceDictionary(values[1]);
+      .then((results) => {
+        const [exchangeInfo, priceTicker] = results;
+        const data = exchangeInfo.symbols;
+        const prices = getPriceDictionary(priceTicker);
         this.cache = {
           name: 'Binance',
           data: mapToCustomArray(data, prices),
           ts: Date.now(),
         };
+      })
+      .catch(err => {
+        return {
+          message: err.message,
+          error: err,
+          status: err.status,
+        }
       });
   }
 };
 
-function getPriceDictionary(priceTicker) {
+function getPriceDictionary(priceTicker = []) {
   return priceTicker.reduce((acc, coin) => {
     acc[coin.symbol] = coin.price;
     return acc;

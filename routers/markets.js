@@ -7,7 +7,7 @@ const {
   }
 } = require('../controllers');
 
-marketsRouter.get('/:id', marketsById);
-marketsRouter.get('/', marketsList);
+marketsRouter.get('/markets/:id', marketsById);
+marketsRouter.get('/markets/', marketsList);
 
 module.exports = marketsRouter;
